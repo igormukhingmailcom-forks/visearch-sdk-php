@@ -1,8 +1,6 @@
-
 <?php
 
-require_once '../ViSearch/ViSearch.php';
-
+namespace ViSearch;
 
 //replace the following with your access and secret key and im_name
 $access_key = getenv('ACCESS_KEY'); //ACCESS_KEY

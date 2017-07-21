@@ -1,21 +1,16 @@
 <?php
 
-// include Requests library
-require_once 'library/Requests.php';
-require_once 'image.php';
+namespace ViSearch;
 
-// make sure Requests can load internal classes
-Requests::register_autoloader();
- 
 class ViSearchBaseRequest
 {
-    
+
     const HOST_API_URL='http://visearch.visenze.com/';
     const SDK_VERSION='visearch-php-sdk/1.1.0';
 
     //
     //
-    //   
+    //
     function __construct($access_key=NULL, $secret_key=NULL)
     {
         $this->access_key =$access_key;
@@ -38,14 +33,14 @@ class ViSearchBaseRequest
             $options = array();
         }
         // set timeout
-        $options['timeout'] = 10*60; 
+        $options['timeout'] = 10*60;
         $options['useragent'] = self::SDK_VERSION;
 
         $headers['Authorization']=$auth_head;
         $headers['X-Requested-With']=self::SDK_VERSION;
 
         // echo "$url";
-        $response = Requests::post($url, $headers, $params, $options);
+        $response = \Requests::post($url, $headers, $params, $options);
         // echo $response->body;
         # Handle any HTTP errors.
         if ($response->status_code != 200)
@@ -81,7 +76,7 @@ class ViSearchBaseRequest
         $url = $this->build_http_parameters($url,$params);
 
         // echo "$url";
-        $response = Requests::get($url, $headers, $params, $options);
+        $response = \Requests::get($url, $headers, $params, $options);
         // echo $response->body;
         # Handle any HTTP errors.
         if ($response->status_code != 200)
@@ -95,7 +90,7 @@ class ViSearchBaseRequest
 
     /**
      * got not working when use Requests library to post file, so here we change to use local curl package.
-     * so 
+     * so
      */
     protected function post_multipart($method, $params=array(), $headers= array(), $options= array()){
         $url = self::HOST_API_URL . $method ;

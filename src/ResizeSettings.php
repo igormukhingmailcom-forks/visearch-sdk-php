@@ -1,4 +1,7 @@
 <?php
+
+namespace ViSearch;
+
 class ResizeSettings
 {
     function __construct($width = 512, $height = 512, $quality =75)
@@ -20,4 +23,3 @@ class ResizeSettings
         return new ResizeSettings(1024,1024,75);
     }
 }
-?>

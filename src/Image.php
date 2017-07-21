@@ -1,14 +1,6 @@
 <?php
 
-require_once 'box.php';
-require_once 'resizeSettings.php';
-
-class ViSearchException extends Exception
-{
-    public function __construct($message = null, $code = 0, Exception $previous = null) {
-        parent::__construct($message, $code, $previous);
-    }
-}
+namespace ViSearch;
 
 class Image
 {
@@ -17,7 +9,7 @@ class Image
     /// Arguments:
     /// `file`, the path to the image, if it is to be taken from a file. or a upload file object
     function __construct($file = '', $resizeSettings = NULL)
-    {   
+    {
         if(!empty($file)) {
             $this->resizeSettings = $resizeSettings;
             $this->local_filepath = $file;
@@ -59,7 +51,7 @@ class Image
         $this->resizeSettings = $resizeSettings;
     }
 
-    function get_path() 
+    function get_path()
     {
         return $this->local_filepath;
     }
@@ -107,5 +99,3 @@ class Image
         $this->im_id = $im_id;
     }
 }
-
-?>

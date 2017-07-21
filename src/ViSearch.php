@@ -1,7 +1,6 @@
 <?php
 
-require_once 'base_request.php';
-
+namespace ViSearch;
 
 class ViSearch extends ViSearchBaseRequest
 {
@@ -28,7 +27,7 @@ class ViSearch extends ViSearchBaseRequest
      *      array(
      *           "brand",
      *           "price"
-     *      ) 
+     *      )
      * @$page, The result page number.
      * @$limit, The number of results returned per page. The maximum number of results returned from the API is 1000.
      * @get_all_fl, If the value is true, All field list will be returned in the query
@@ -47,7 +46,7 @@ class ViSearch extends ViSearchBaseRequest
         );
         return $this->get('recommendation', $params);
     }
-   
+
     /**
      * search
      * @$im_name, The image name of the image to search against the image collection.
@@ -63,7 +62,7 @@ class ViSearch extends ViSearchBaseRequest
      *      array(
      *           "brand",
      *           "price"
-     *      ) 
+     *      )
      * @$page, The result page number.
      * @$limit, The number of results returned per page. The maximum number of results returned from the API is 1000.
      * @get_all_fl, If the value is true, All field list will be returned in the query
@@ -98,7 +97,7 @@ class ViSearch extends ViSearchBaseRequest
      *      array(
      *           "brand",
      *           "price"
-     *      ) 
+     *      )
      * @$page, The result page number.
      * @$limit, The number of results returned per page. The maximum number of results returned from the API is 1000.
      * @get_all_fl, If the value is true, All field list will be returned in the query
@@ -120,7 +119,7 @@ class ViSearch extends ViSearchBaseRequest
 
     /**
      * uploadsearch
-     * @$image, 
+     * @$image,
      *      query image object, it must be a Image object.
      * @$score, If the value is true, the scores for each returned image will be included in the response.
      * @$fq, The metadata fields to filter the results. Only fields marked with ‘searchable’ in ViSearch Dashboard can be used as filters.
@@ -134,7 +133,7 @@ class ViSearch extends ViSearchBaseRequest
      *      array(
      *           "brand",
      *           "price"
-     *      ) 
+     *      )
      * @$page, The result page number.
      * @$limit, The number of results returned per page. The maximum number of results returned from the API is 1000.
      * @get_all_fl, If the value is true, All field list will be returned in the query
@@ -173,7 +172,7 @@ class ViSearch extends ViSearchBaseRequest
             return $this->get('uploadsearch', $params);
         }else {
             if (class_exists('CURLFile')) {
-                $params['image'] = new CURLFile(realpath($image->local_filepath));
+                $params['image'] = new \CURLFile(realpath($image->local_filepath));
             } else {
                 $params['image'] = "@{$image->local_filepath}";
             }
@@ -252,4 +251,3 @@ class ViSearch extends ViSearchBaseRequest
         return $this->get('insert/status/'.$trans_id);
     }
 }
-?>
